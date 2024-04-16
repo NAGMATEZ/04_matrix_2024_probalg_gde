@@ -70,36 +70,6 @@ def M_transp(M):
             TM[j][i]=M[i][j]
     return TM
 
-def gauss_elimination(M):
-    n = len(M)
-
-    for i in range(n):
-        # Search for maximum in this column
-        maxEl = abs(M[i][i])
-        maxRow = i
-        for k in range(i+1, n):
-            if abs(M[k][i]) > maxEl:
-                maxEl = abs(M[k][i])
-                maxRow = k
-
-        # Swap maximum row with current row
-        M[maxRow], M[i] = M[i], M[maxRow]
-
-        # Make all rows below this one 0 in current column
-        for k in range(i+1, n):
-            c = -M[k][i]/M[i][i]
-            for j in range(i, n+1):
-                if i == j:
-                    M[k][j] = 0
-                else:
-                    M[k][j] += c * M[i][j]
-
-    # Solve equation Ax=b for an upper triangular matrix A
-    x = [0 for i in range(n)]
-    for i in range(n-1, -1, -1):
-        x[i] = M[i][n]/M[i][i]
-        for k in range(i-1, -1, -1):
-            M[k][n] -= M[k][i] * x[i]
 def M_DET(M):
     # Alap eset: egydimenziós mátrix determinánsa
     if len(M) == 1:
